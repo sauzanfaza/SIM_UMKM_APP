@@ -2,6 +2,7 @@
 const express = require('express')
 const cors = require('cors')
 const produkRoutes = require('./src/routes/produk')
+const penjualanRoutes = require('./src/routes/penjualan')
 require('dotenv').config()
 require('./src/config/db')
 
@@ -12,6 +13,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use('/produk', produkRoutes)
+app.use('/penjualan', penjualanRoutes )
 
 //test route nya
 app.get('/', (req, res) => {
