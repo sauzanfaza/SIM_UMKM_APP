@@ -126,7 +126,7 @@ exports.updateStokAwal = (req, res) => {
 // Tambah di controller
 exports.getTanggalAktif = (req, res) => {
     const today = new Date().toISOString().slice(0, 10)
-    const sql = `SELECT tanggal FROM penjualan_harian WHERE tanggal = ?`
+    const sql = `SELECT id_penjualan, tanggal FROM penjualan_harian WHERE tanggal = ?`
     db.query(sql, [today], (err, result) => {
         if (err) return res.status(500).json(err)
         res.json(result[0] || { tanggal: today })
@@ -146,5 +146,28 @@ exports.getPenjualan = (req, res) => {
     db.query(sql, [today], (err, result) => {
         if (err) return res.status(500).json(err)
         res.json(result)
+    })
+}
+
+//closing harian
+exports.closingHarian = (req, res) => {
+    const { id } = req.params
+    const total_pendapatan = Number(req.body.total_pendapatan) || 0
+
+    console.log("closing id:", id, "total:", total_pendapatan) // debug
+
+    const sql = `
+        UPDATE penjualan_harian 
+        SET total_pendapatan = ?
+        WHERE id_penjualan = ?
+    `
+
+    db.query(sql, [total_pendapatan, id], (err, result) => {
+        if (err) {
+            console.error("Error closing:", err) // lihat error spesifiknya di terminal
+            return res.status(500).json(err)
+        }
+        if (result.affectedRows === 0) return res.status(404).json({ message: "Tidak ditemukan" })
+        res.json({ message: "Closing berhasil disimpan" })
     })
 }

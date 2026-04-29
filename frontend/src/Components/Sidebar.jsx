@@ -21,7 +21,6 @@ export default function Sidebar() {
                 <Link to="/" className={menuClass}><LuLayoutDashboard /> Dashboard</Link>
                 <Link to="/produk" className={menuClass}><LuCakeSlice /> Produk</Link>
                 <Link to="/penjualanHarian" className={menuClass}><LuClipboardList /> Penjualan Harian</Link>
-                <Link to="/closingHarian" className={menuClass}><FaRegCalendarCheck />Closing Harian</Link>
                 <Link to="/laporan" className={menuClass}><GoChecklist /> Laporan</Link>
             </nav>
         </aside>
