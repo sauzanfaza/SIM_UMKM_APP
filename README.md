@@ -58,7 +58,7 @@ JWT_SECRET=your_secret_key
 
 #Database Setup
 Create a MySQL database:
-CREATE DATABASE sim_umkm;
+CREATE DATABASE umkm_db;
 
 Import database file:
-mysql -u root -p sim_umkm < database/sim_umkm.sql
+mysql -u root -p umkm_db < database/umkm_db.sql
