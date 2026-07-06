@@ -140,7 +140,7 @@ export default function Laporan() {
                     <div className="grid grid-cols-3 gap-4 mb-6">
                         <div className="border border-slate-400 py-6 px-6 rounded-xl">
                             <h1 className="font-semibold text-slate-500">Total Pendapatan</h1>
-                            <p className="my-3 text-3xl font-bold text-green-600">{formatRupiah(totalPendapatan)}</p>
+                            <p className="my-3 text-3xl font-bold text-[#004030]">{formatRupiah(totalPendapatan)}</p>
                         </div>
                         <div className="border border-slate-400 py-6 px-6 rounded-xl">
                             <h1 className="font-semibold text-slate-500">Total Terjual</h1>
@@ -198,13 +198,13 @@ export default function Laporan() {
                     <div className="grid grid-cols-5 p-3 mt-2 bg-slate-100 border border-slate-400 rounded-lg text-sm font-bold">
                         <div className="col-span-3">Total</div>
                         <div className="text-center">{totalTerjual} item</div>
-                        <div className="text-center text-green-600">{formatRupiah(totalPendapatan)}</div>
+                        <div className="text-center text-[#004030]">{formatRupiah(totalPendapatan)}</div>
                     </div>
 
                     {/* Tombol Export */}
                     <button
                         onClick={handleExport}
-                        className="mt-4 self-end bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all"
+                        className="mt-4 self-end bg-green-700 hover:bg-[#004030] text-white font-semibold px-6 py-2.5 rounded-xl transition-all"
                     >
                         Export Excel
                     </button>

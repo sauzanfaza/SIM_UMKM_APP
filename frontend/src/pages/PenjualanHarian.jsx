@@ -225,7 +225,7 @@ export default function PenjualanHarian() {
                         </div>
                         <div className="flex-1 bg-white border border-slate-300 rounded-xl px-6 py-4 shadow-sm">
                             <p className="text-sm text-slate-500 mb-1">Total Pendapatan</p>
-                            <p className="text-2xl font-bold text-green-600">{formatRupiah(totalPendapatan)}</p>
+                            <p className="text-2xl font-bold text-[#004030]">{formatRupiah(totalPendapatan)}</p>
                         </div>
 
                         {/* Tombol closing */}
@@ -274,7 +274,7 @@ export default function PenjualanHarian() {
                             </div>
                             <div className="border-t border-slate-200 pt-2 flex justify-between">
                                 <span className="font-semibold text-slate-700">Total Pendapatan</span>
-                                <span className="font-bold text-green-600 text-base">{formatRupiah(totalPendapatan)}</span>
+                                <span className="font-bold text-[#004030] text-base">{formatRupiah(totalPendapatan)}</span>
                             </div>
                         </div>
 
@@ -288,7 +288,7 @@ export default function PenjualanHarian() {
                                         <span className="text-slate-500">Terjual: </span>
                                         <span className="font-semibold">{item.jumlah_terjual} pcs</span>
                                         <span className="text-slate-300 mx-1">·</span>
-                                        <span className="text-green-600 font-semibold">{formatRupiah(item.subtotal)}</span>
+                                        <span className="text-[#004030] font-semibold">{formatRupiah(item.subtotal)}</span>
                                     </div>
                                 </div>
                             ))}
