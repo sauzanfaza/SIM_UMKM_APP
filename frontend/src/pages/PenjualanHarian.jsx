@@ -59,6 +59,11 @@ export default function PenjualanHarian() {
             return
         }
 
+        if (stokAkhirNum < 0) {
+            alert("Stok tidak bisa kurang dari nol!!")
+            return
+        }
+
         const jumlah_terjual = stokAwalNum - stokAkhirNum
         const subtotal = jumlah_terjual * hargaNum
 

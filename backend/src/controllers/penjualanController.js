@@ -83,7 +83,7 @@ exports.updatePenjualan = (req, res) => {
     const subtotal = Number(req.body.subtotal) || 0;
 
     // 2. Debugging: cek di cmd apakah angkanya masuk atau NaN
-    console.log(`Update ID ${id}: Terjual ${jumlah_terjual}, Subtotal ${subtotal}`);
+    // console.log(`Update ID ${id}: Terjual ${jumlah_terjual}, Subtotal ${subtotal}`);
 
     const sql = `
         UPDATE detail_penjualan 
@@ -154,7 +154,7 @@ exports.closingHarian = (req, res) => {
     const { id } = req.params
     const total_pendapatan = Number(req.body.total_pendapatan) || 0
 
-    console.log("closing id:", id, "total:", total_pendapatan) // debug
+    // console.log("closing id:", id, "total:", total_pendapatan) // debug
 
     const sql = `
         UPDATE penjualan_harian 
