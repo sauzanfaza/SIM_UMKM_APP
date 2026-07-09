@@ -29,7 +29,7 @@ export default function TambahStok({ onSuccess }) {
 
         {/* MODAL */}
         {open && (
-            <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
+            <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
                 <div className="bg-white p-6 rounded-xl w-96">
 
                     {/* STEP 1 */}

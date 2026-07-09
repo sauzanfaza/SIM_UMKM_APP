@@ -107,6 +107,10 @@ export default function PenjualanHarian() {
             console.error(err)
             alert("Gagal simpan closing")
         }
+
+        //debug soal button closing harian, harus d refresh bru data berhasil di simpan
+        // console.log("idPenjualan =", idPenjualan)
+        // console.log("totalPendapatan =", totalPendapatan)
     }
 
     const formatRupiah = (num) => {
