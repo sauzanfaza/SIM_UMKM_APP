@@ -44,6 +44,12 @@ export default function PenjualanHarian() {
         getTanggal()
     }, [])
 
+    //fungsi refresh 
+    const refreshAll = async () => {
+        await getData()
+        await getTanggal()
+    }
+
     const handleUpdate = async (item, stokAkhir) => {
         if (stokAkhir === "") return
         const stokAwalNum = Number(item.stok_awal)
@@ -96,6 +102,10 @@ export default function PenjualanHarian() {
     }
 
     const handleSimpanClosing = async () => {
+        if(!idPenjualan) {
+            alert("ID Penjualan belum siap, coba resfresh halaman")
+            return
+        }
         try {
             await axios.patch(`http://localhost:3000/penjualan/${idPenjualan}/closing`, {
                 total_pendapatan: totalPendapatan
@@ -107,10 +117,6 @@ export default function PenjualanHarian() {
             console.error(err)
             alert("Gagal simpan closing")
         }
-
-        //debug soal button closing harian, harus d refresh bru data berhasil di simpan
-        // console.log("idPenjualan =", idPenjualan)
-        // console.log("totalPendapatan =", totalPendapatan)
     }
 
     const formatRupiah = (num) => {
@@ -140,7 +146,7 @@ export default function PenjualanHarian() {
             <div className="flex-1">
                 <Navbar title="Penjualan Harian">
                     <span className="text-slate-500 text-sm font-medium mr-4">{tanggal}</span>
-                    <TambahStok onSuccess={getData} />
+                    <TambahStok onSuccess={refreshAll} />
                 </Navbar>
 
                 <div className="py-6 px-8 text-lg">
@@ -240,7 +246,7 @@ export default function PenjualanHarian() {
                         {/* Tombol closing */}
                         <button
                             onClick={() => setShowClosing(true)}
-                            disabled={!semuaStokAkhirTerisi}
+                            disabled={!semuaStokAkhirTerisi || !idPenjualan} //disable jika stok akhir belum terisi semua, sama ketika idPenjualan belum siap
                             className={`px-6 py-4 rounded-xl font-semibold text-base transition-all ${
                                 semuaStokAkhirTerisi
                                     ? "bg-[#004030] text-white hover:bg-[#346739] shadow-sm"
