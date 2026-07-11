@@ -28,6 +28,7 @@ exports.getDashboard = (req, res) => {
         JOIN produk p ON dp.id_produk = p.id_produk
         JOIN penjualan_harian ph ON dp.id_penjualan = ph.id_penjualan
         WHERE DATE_FORMAT(ph.tanggal, '%Y-%m-%d') = ?
+        GROUP BY p.id_produk, p.nama_produk
         ORDER BY total_terjual DESC
         LIMIT 1
     `

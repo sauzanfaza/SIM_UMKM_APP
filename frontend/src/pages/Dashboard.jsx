@@ -10,6 +10,7 @@ import {
 export default function Dashboard() {
     const [dashboard, setDashboard] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [tanggal, setTanggal] = useState("")
 
     const getDashboard = async () => {
         try {
@@ -22,8 +23,26 @@ export default function Dashboard() {
         }
     }
 
+    const getTanggal = async () => {
+        try {
+            const res = await axios.get("http://localhost:3000/penjualan/tanggal-aktif")
+            setIdPenjualan(res.data.id_penjualan)
+            const date = new Date(res.data.tanggal)
+            const formatted = date.toLocaleDateString("id-ID", {
+                weekday: "long", year: "numeric", month: "long", day: "numeric"
+            })
+            setTanggal(formatted)
+        } catch {
+            const formatted = new Date().toLocaleDateString("id-ID", {
+                weekday: "long", year: "numeric", month: "long", day: "numeric"
+            })
+            setTanggal(formatted)
+        }
+    }
+
     useEffect(() => {
         getDashboard()
+        getTanggal()
     }, [])
 
     const formatRupiah = (num) => {
@@ -46,9 +65,10 @@ export default function Dashboard() {
     return (
         <div className="flex">
             <Sidebar />
-
             <div className="flex-1">
-                <Navbar title="Dashboard"></Navbar>
+                <Navbar title="Dashboard">
+                    <span className="text-slate-500 text-sm font-medium mr-4">{tanggal}</span>
+                </Navbar>
 
                 <div className="p-6">
                     {/* 3 Cards */}

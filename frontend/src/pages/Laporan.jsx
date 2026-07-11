@@ -10,6 +10,25 @@ export default function Laporan() {
     const [tanggalList, setTanggalList] = useState([])
     const [selectedTanggal, setSelectedTanggal] = useState("")
     const [loading, setLoading] = useState(false)
+    const [tanggal, setTanggal] = useState("")
+
+    //ambil tanggal
+    const getTanggal = async () => {
+        try {
+            const res = await axios.get("http://localhost:3000/penjualan/tanggal-aktif")
+            setIdPenjualan(res.data.id_penjualan)
+            const date = new Date(res.data.tanggal)
+            const formatted = date.toLocaleDateString("id-ID", {
+                weekday: "long", year: "numeric", month: "long", day: "numeric"
+            })
+            setTanggal(formatted)
+        } catch {
+            const formatted = new Date().toLocaleDateString("id-ID", {
+                weekday: "long", year: "numeric", month: "long", day: "numeric"
+            })
+            setTanggal(formatted)
+        }
+    }
 
     // Format tanggal tanpa timezone shift
     const formatTanggal = (tgl) => {
@@ -46,6 +65,7 @@ export default function Laporan() {
 
     useEffect(() => {
         getTanggalList()
+        getTanggal()
     }, [])
 
     useEffect(() => {
@@ -132,7 +152,9 @@ export default function Laporan() {
             <Sidebar />
 
             <div className="flex-1 flex flex-col h-screen">
-                <Navbar title="Laporan"></Navbar>
+                <Navbar title="Laporan">
+                    <span className="text-slate-500 text-sm font-medium mr-4">{tanggal}</span>
+                </Navbar>
 
                 <div className="p-6 flex-1 overflow-hidden flex flex-col">
                     {/* Ringkasan */}
