@@ -1,6 +1,7 @@
 import Sidebar from "../Components/Sidebar"
 import Navbar from "../Components/Navbar"
 import TambahStok from "../Components/TambahStok"
+import Tanggal from "../Components/Tanggal"
 import { useState, useEffect, useRef } from "react"
 import axios from "axios"
 
@@ -8,7 +9,6 @@ export default function PenjualanHarian() {
     const [data, setData] = useState([])
     const [editItem, setEditItem] = useState(null)
     const [newStokAwal, setNewStokAwal] = useState("")
-    const [tanggal, setTanggal] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
     const [showClosing, setShowClosing] = useState(false)
     const [idPenjualan, setIdPenjualan] = useState(null)
@@ -22,26 +22,8 @@ export default function PenjualanHarian() {
         setData(res.data)
     }
 
-    const getTanggal = async () => {
-        try {
-            const res = await axios.get("http://localhost:3000/penjualan/tanggal-aktif")
-            setIdPenjualan(res.data.id_penjualan)
-            const date = new Date(res.data.tanggal)
-            const formatted = date.toLocaleDateString("id-ID", {
-                weekday: "long", year: "numeric", month: "long", day: "numeric"
-            })
-            setTanggal(formatted)
-        } catch {
-            const formatted = new Date().toLocaleDateString("id-ID", {
-                weekday: "long", year: "numeric", month: "long", day: "numeric"
-            })
-            setTanggal(formatted)
-        }
-    }
-
     useEffect(() => {
         getData()
-        getTanggal()
     }, [])
 
     //fungsi refresh 
@@ -145,7 +127,7 @@ export default function PenjualanHarian() {
 
             <div className="flex-1">
                 <Navbar title="Penjualan Harian">
-                    <span className="text-slate-500 text-sm font-medium mr-4">{tanggal}</span>
+                    <Tanggal />
                     <TambahStok onSuccess={refreshAll} />
                 </Navbar>
 
