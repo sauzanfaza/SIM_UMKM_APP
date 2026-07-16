@@ -4,6 +4,7 @@ import TambahStok from "../Components/TambahStok"
 import Tanggal from "../Components/Tanggal"
 import { useState, useEffect, useRef } from "react"
 import axios from "axios"
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 export default function PenjualanHarian() {
     const [data, setData] = useState([])
@@ -20,6 +21,10 @@ export default function PenjualanHarian() {
     const getData = async () => {
         const res = await axios.get("http://localhost:3000/penjualan")
         setData(res.data)
+        if(res.data.length > 0) {
+            setIdPenjualan(res.data[0].id_penjualan)
+        }
+        // console.log(res.data)
     }
 
     useEffect(() => {
@@ -29,7 +34,18 @@ export default function PenjualanHarian() {
     //fungsi refresh 
     const refreshAll = async () => {
         await getData()
-        await getTanggal()
+    }
+
+    //Delete Produk Aktif
+    const deleteProductActive = async (id) => {
+        const confirmAction = window.confirm("Yakin hapus Produk Aktif ini?")
+        if(!confirmAction) return
+        try {
+            await axios.delete(`http://localhost:3000/penjualan/${id}`)
+            getData()
+        } catch(err) {
+            console.log(err)
+        }
     }
 
     const handleUpdate = async (item, stokAkhir) => {
@@ -131,9 +147,9 @@ export default function PenjualanHarian() {
                     <TambahStok onSuccess={refreshAll} />
                 </Navbar>
 
-                <div className="py-6 px-8 text-lg">
+                <div className="py-6 px-8 text-md">
                     {/* Header tabel */}
-                    <div className="grid grid-cols-8 bg-slate-200 border border-slate-400 rounded-lg">
+                    <div className="grid grid-cols-9 bg-slate-200 border border-slate-400 rounded-lg">
                         <div className="p-2 text-center font-semibold">No</div>
                         <div className="p-2 text-center font-semibold">Nama</div>
                         <div className="p-2 text-center font-semibold">Harga</div>
@@ -142,6 +158,7 @@ export default function PenjualanHarian() {
                         <div className="p-2 text-center font-semibold">Terjual</div>
                         <div className="p-2 text-center font-semibold">Total</div>
                         <div className="p-2 text-center font-semibold">Aksi</div>
+                        <div className="p-2 text-center font-semibold">Delete</div>
                     </div>
 
                     {/* Rows */}
@@ -152,12 +169,12 @@ export default function PenjualanHarian() {
                     ) : (
                         currentData.map((item, index) => (
                             <div key={item.id_detail}
-                                className="grid grid-cols-8 my-2 py-2 rounded-lg bg-white border border-slate-400">
-                                <div className="p-2 text-center">{startIndex + index + 1}</div>
-                                <div className="p-2 text-center">{item.nama_produk}</div>
-                                <div className="p-2 text-center">{formatRupiah(item.harga)}</div>
-                                <div className="p-2 text-center">{item.stok_awal}</div>
-                                <div className="p-2 text-center">
+                                className="grid grid-cols-9 my-2 py-2 rounded-lg bg-white border border-slate-400">
+                                <div className="py-2 text-center">{startIndex + index + 1}</div>
+                                <div className="py-2 text-center">{item.nama_produk}</div>
+                                <div className="py-2 text-center">{formatRupiah(item.harga)}</div>
+                                <div className="py-2 text-center">{item.stok_awal}</div>
+                                <div className="py-2 text-center">
                                     <input
                                         type="number"
                                         defaultValue={item.stok_akhir}
@@ -168,14 +185,21 @@ export default function PenjualanHarian() {
                                         }}
                                     />
                                 </div>
-                                <div className="p-2 text-center">{item.jumlah_terjual ?? "-"}</div>
-                                <div className="p-2 text-center">{formatRupiah(item.subtotal)}</div>
-                                <div className="p-2 text-center">
+                                <div className="py-2 text-center">{item.jumlah_terjual ?? "-"}</div>
+                                <div className="py-2 text-center">{formatRupiah(item.subtotal)}</div>
+                                <div className="py-2 text-center">
                                     <button
                                         onClick={() => { setEditItem(item); setNewStokAwal(item.stok_awal) }}
-                                        className="bg-blue-500 text-white text-sm px-3 py-1 rounded hover:bg-blue-600"
+                                        className="bg-blue-500 text-white text-sm px-3 py-1 rounded hover:bg-blue-600 cursor-pointer"
                                     >
                                         Edit Stok
+                                    </button>
+                                </div>
+                                <div className="py-2 text-center">
+                                    <button
+                                    className="hover:text-red-500 cursor-pointer"
+                                    onClick={() => deleteProductActive(item.id_produk)}>
+                                      <RiDeleteBin5Line />
                                     </button>
                                 </div>
                             </div>
@@ -253,7 +277,7 @@ export default function PenjualanHarian() {
                 <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
                     <div className="bg-white rounded-2xl p-6 w-[480px] shadow-2xl">
                         <h2 className="text-xl font-bold mb-1">Closing Harian</h2>
-                        <p className="text-sm text-slate-500 mb-5">{tanggal}</p>
+                        <p className="text-sm text-slate-500 mb-5">{<Tanggal/>}</p>
 
                         <div className="bg-slate-50 rounded-xl p-4 mb-4 space-y-2 text-sm">
                             <h3 className="font-semibold text-slate-700 mb-3">Ringkasan Penjualan</h3>

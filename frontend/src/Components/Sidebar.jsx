@@ -14,7 +14,7 @@ export default function Sidebar() {
         <>
         <aside className="flex flex-col w-64 min-h-screen bg-[#004030] text-white p-4">
             <div className="flex items-center gap-3 mt-3 mb-10 mx-4">
-                <img src="./public/donat-web-removebg-preview.png" alt="" className="w-12 h-12 object-contain"/>
+                <img src="./donat-web-removebg-preview.png" alt="" className="w-12 h-12 object-contain"/>
                 <h1 className="font-bold">Toko Kue Bu Imas</h1>
             </div>
             

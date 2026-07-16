@@ -149,6 +149,36 @@ exports.getPenjualan = (req, res) => {
     })
 }
 
+//delete produk aktif
+exports.deleteProductActive = (req, res) => {
+    const { id } = req.params;
+
+    const sql = `DELETE FROM detail_penjualan
+                WHERE id_detail = (
+                    SELECT id_detail 
+                    FROM (
+                        SELECT id_detail
+                        FROM detail_penjualan
+                        WHERE id_produk = ?
+                        ORDER BY id_detail DESC
+                        LIMIT 1
+                    ) AS temp
+                )`
+
+    db.query(sql, [id], (err, result) => {
+        if(err) {
+            return res.status(500).json(err)
+        }
+
+        if(result.affectedRows === 0) {
+            return res.status(404).json({
+                message: "Produk aktif tidak ditemukan"
+            })
+        }
+        res.json({message: "Produk Aktif berhasil di hapus"})
+    })
+}
+
 //closing harian
 exports.closingHarian = (req, res) => {
     const { id } = req.params
