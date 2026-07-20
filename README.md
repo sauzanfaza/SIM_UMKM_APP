@@ -32,14 +32,18 @@ cd SIM_UMKM_APP
 ```
 
 # Frontend Setup
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
 #Backend Setup
+```bash
 cd backend
 npm install
 npm run start
+```
 
 ## 🔑 Environment Variables
 
