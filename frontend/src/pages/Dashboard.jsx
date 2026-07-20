@@ -12,6 +12,13 @@ export default function Dashboard() {
     const [dashboard, setDashboard] = useState(null)
     const [loading, setLoading] = useState(true)
 
+    // state open tutup sidebar
+    const [isSideBarOpen, setIsSideBarOpen] = useState(false)
+
+    function handleSideBar() {
+        setIsSideBarOpen(prev => !prev)
+    }
+
     const getDashboard = async () => {
         try {
             const res = await axios.get("http://localhost:3000/dashboard")
@@ -46,9 +53,15 @@ export default function Dashboard() {
 
     return (
         <div className="flex">
-            <Sidebar />
+            <Sidebar 
+            isSideBarOpen={isSideBarOpen}
+            setIsSideBarOpen={setIsSideBarOpen}
+            handleSideBar={handleSideBar}
+            />
             <div className="flex-1">
-                <Navbar title="Dashboard">
+                <Navbar 
+                title="Dashboard"
+                handleSideBar={handleSideBar}>
                     <Tanggal />
                 </Navbar>
 

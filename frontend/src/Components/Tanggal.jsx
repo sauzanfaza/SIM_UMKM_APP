@@ -25,6 +25,6 @@ export default function Tanggal() {
     }, [])
 
     return (
-        <span className="text-slate-500 text-sm font-medium mr-4">{tanggal}</span>
+        <span className="text-slate-500 text-[12px] md:text-sm font-medium mr-4">{tanggal}</span>
     )
 }
