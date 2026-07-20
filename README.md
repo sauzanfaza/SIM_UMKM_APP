@@ -18,7 +18,7 @@ Aplikasi berbasis web untuk membantu pengelolaan data UMKM Toko Kue Bu Imas seca
 # Backend:
 - Node.js
 - Express.js
-#Database:
+# Database:
 - MySQL
 
 
@@ -32,14 +32,18 @@ cd SIM_UMKM_APP
 ```
 
 # Frontend Setup
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
-#Backend Setup
+# Backend Setup
+```bash
 cd backend
 npm install
 npm run start
+```
 
 ## 🔑 Environment Variables
 
