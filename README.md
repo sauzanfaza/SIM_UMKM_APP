@@ -18,7 +18,7 @@ Aplikasi berbasis web untuk membantu pengelolaan data UMKM Toko Kue Bu Imas seca
 # Backend:
 - Node.js
 - Express.js
-#Database:
+# Database:
 - MySQL
 
 
