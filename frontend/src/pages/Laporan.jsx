@@ -12,6 +12,12 @@ export default function Laporan() {
     const [selectedTanggal, setSelectedTanggal] = useState("")
     const [loading, setLoading] = useState(false)
 
+    // state open tutup sidebar
+    const [isSideBarOpen, setIsSideBarOpen] = useState(false)
+
+    function handleSideBar() {
+        setIsSideBarOpen(prev => !prev)
+    }
 
     // Format tanggal tanpa timezone shift
     const formatTanggal = (tgl) => {
@@ -131,10 +137,14 @@ export default function Laporan() {
 
     return (
         <div className="flex">
-            <Sidebar />
+            <Sidebar 
+            isSideBarOpen={isSideBarOpen}
+            setIsSideBarOpen={setIsSideBarOpen}
+            handleSideBar={handleSideBar}/>
 
             <div className="flex-1 flex flex-col h-screen">
-                <Navbar title="Laporan">
+                <Navbar title="Laporan"
+                        handleSideBar={handleSideBar}>
                     <Tanggal />
                 </Navbar>
 

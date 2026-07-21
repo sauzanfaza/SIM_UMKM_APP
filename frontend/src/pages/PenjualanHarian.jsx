@@ -16,6 +16,13 @@ export default function PenjualanHarian() {
     const itemsPerPage = 5
     const prevValuesRef = useRef({})
 
+    // state open tutup sidebar
+    const [isSideBarOpen, setIsSideBarOpen] = useState(false)
+
+    function handleSideBar() {
+        setIsSideBarOpen(prev => !prev)
+    }
+
     const today = new Date().toISOString().slice(0, 10)
 
     const getData = async () => {
@@ -139,10 +146,14 @@ export default function PenjualanHarian() {
 
     return (
         <div className="flex">
-            <Sidebar />
+            <Sidebar 
+            isSideBarOpen={isSideBarOpen}
+            setIsSideBarOpen={setIsSideBarOpen}
+            handleSideBar={handleSideBar}/>
 
             <div className="flex-1">
-                <Navbar title="Penjualan Harian">
+                <Navbar title="Penjualan Harian"
+                        handleSideBar={handleSideBar}>
                     <Tanggal />
                     <TambahStok onSuccess={refreshAll} />
                 </Navbar>

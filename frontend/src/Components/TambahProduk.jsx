@@ -42,16 +42,16 @@ export default function TambahProduk({ onSuccess }) {
       {/* BUTTON */}
       <button
         onClick={() => setOpen(true)}
-        className="bg-[#004030] hover:bg-[#346739] text-white px-4 py-2 rounded-lg cursor-pointer"
+        className="bg-[#004030] hover:bg-[#346739] text-white px-2 py-2 text-sm md:text-md md:px-4 md:py-2 rounded-lg cursor-pointer"
       >
         + Tambah Produk
       </button>
 
       {/* MODAL */}
       {open && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
-          <div className="bg-white p-8 rounded-xl w-96">
-            <h2 className="text-lg font-semibold mb-4">Tambah Produk</h2>
+        <div className="fixed z-50 inset-0 bg-black/40 flex items-center justify-center md:pl-12">
+          <div className="bg-white p-4 md:p-8 rounded-xl md:w-96">
+            <h2 className="md:text-lg font-semibold mb-4">Tambah Produk</h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <input

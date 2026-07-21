@@ -15,7 +15,7 @@ export default function SearchBar() {
             type="text"  
             placeholder="cari sesuatu"
             onChange={(e) => setKeyword(e.target.value)}
-            className="w-full pl-10 pr-4 py-4 rounded-lg border border-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500"/>
+            className="w-full pl-10 pr-4 py-2 lg:py-4 rounded-lg border border-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500"/>
             </div>
         </div>
     )

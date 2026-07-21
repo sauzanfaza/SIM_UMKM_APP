@@ -17,6 +17,13 @@ export default function Produk() {
   const itemsPerPage = 6;
   const {keyword} = useSearch()
 
+  //state sidebar
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false)
+  
+  function handleSideBar() {
+    setIsSideBarOpen(prev => !prev)
+  }
+
   useEffect(() => {
     getProduk();
   }, []);
@@ -58,22 +65,26 @@ export default function Produk() {
 
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar 
+      isSideBarOpen={isSideBarOpen}
+      setIsSideBarOpen={setIsSideBarOpen}
+      handleSideBar={handleSideBar}/>
 
       <div className="flex-1">
-        <Navbar title="Produk">
+        <Navbar title="Produk"
+                handleSideBar={handleSideBar}>
           <TambahProduk onSuccess={getProduk} />
         </Navbar>
 
         <SearchBar />
 
         {/* product list */}
-        <div className="py-4 px-8 text-lg">
+        <div className="py-2 md:py-4 px-1 md:px-8 text-[10px] md:text-[12px] lg:text-lg">
           <div className="grid grid-cols-4 bg-slate-200 border border-slate-400 rounded-lg">
-            <div className="p-2 text-center">No</div>
-            <div className="p-2 text-center">Nama Produk</div>
-            <div className="p-2 text-center">Harga</div>
-            <div className="p-2 text-center">Action</div>
+            <div className="py-2 px-1 text-center">No</div>
+            <div className="py-2 px-1 text-center">Nama Produk</div>
+            <div className="py-2 px-1 text-center">Harga</div>
+            <div className="py-2 px-1 text-center">Action</div>
           </div>
 
           {currentData.map((item, index) => (
