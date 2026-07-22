@@ -14,7 +14,7 @@ export default function Produk() {
   const [selectedProduk, setSelectedProduk] = useState(null);
   const [openEdit, setOpenEdit] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 5;
   const {keyword} = useSearch()
 
   //state sidebar
@@ -90,7 +90,7 @@ export default function Produk() {
           {currentData.map((item, index) => (
             <div
               key={item.id_produk}
-              className="grid grid-cols-4 my-1 py-2 rounded-lg bg-white border border-slate-400"
+              className="grid grid-cols-4 my-1 py-2 md:py-4 rounded-lg bg-white border border-slate-400"
             >
               <div className="p-2 text-center">{startIndex + index + 1}</div>
               <div className="p-2 text-center">{item.nama_produk}</div>

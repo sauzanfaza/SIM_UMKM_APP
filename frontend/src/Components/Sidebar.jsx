@@ -8,14 +8,14 @@ import { IoClose } from "react-icons/io5";
 
 export default function Sidebar({isSideBarOpen, setIsSideBarOpen, handleSideBar}) {
 
-    const menuClass = "flex items-center gap-2 md:gap-3 px-4 py-2 lg:py-3 rounded-lg hover:bg-[#346739] text-[14px] md:text-[16px] lg:text-xl font-semibold"
+    const menuClass = "flex items-center gap-2 md:gap-3 px-4 py-2 md:mt-4 lg:py-4 rounded-lg hover:bg-[#346739] text-[14px] md:text-[16px] lg:text-xl font-semibold"
     
       return (
         <>        
         {/* mobile menu */}
             <aside className={`fixed z-50 md:static md:translate-x-0 md:flex md:flex-col 
                 ${isSideBarOpen ? "translate-x-0" : "-translate-x-full"}
-                w-40 md:w-48 lg:w-64 md:min-h-screen bg-[#004030] text-white p-4 h-screen`}>
+                w-40 md:w-48 lg:w-64 bg-[#004030] text-white p-4 min-h-screen`}>
             <div className="realtive w-full md:hidden">
                 <IoClose 
                 className="absolute top-4 right-4"
@@ -23,7 +23,7 @@ export default function Sidebar({isSideBarOpen, setIsSideBarOpen, handleSideBar}
                 />
             </div>
             <div className="flex items-center gap-2 mt-6 mb-10 md:mb-10 md:mx-4">
-                <img src="./donat-web-removebg-preview.png" alt="" className="w-10 h-10 md:w-12 md:h-12 object-contain"/>
+                <img src="/donat-web-removebg-preview.png" alt="" className="w-10 h-10 md:w-12 md:h-12 object-contain"/>
                 <h1 className="font-bold">Toko Kue Bu Imas</h1>
             </div>
             

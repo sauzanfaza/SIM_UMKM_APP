@@ -39,8 +39,8 @@ export default function EditProduk({ data, open, onClose, onSuccess }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-xl w-96">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center md:pl-12">
+      <div className="bg-white p-4 md:p-8 rounded-xl md:w-96">
         <h2 className="mb-4 font-semibold">Edit Produk</h2>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
