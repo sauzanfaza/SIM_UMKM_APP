@@ -158,7 +158,7 @@ export default function PenjualanHarian() {
                     <TambahStok onSuccess={refreshAll} />
                 </Navbar>
 
-                <div className="py-6 px-8 text-md">
+                <div className="px-1 py-2 text-[10px] md:py-6 md:px-8 md:text-md">
                     {/* Header tabel */}
                     <div className="grid grid-cols-9 bg-slate-200 border border-slate-400 rounded-lg">
                         <div className="p-2 text-center font-semibold">No</div>
