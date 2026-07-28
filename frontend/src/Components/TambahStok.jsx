@@ -22,7 +22,7 @@ export default function TambahStok({ onSuccess }) {
         {/* BUTTON */}
         <button 
             onClick={() => setOpen(true)}
-            className="bg-[#004030] hover:bg-[#346739] text-white px-4 py-2 rounded-lg cursor-pointer"
+            className="bg-[#004030] hover:bg-[#346739] text-white text-[12px] md:text-md lg:text-lg px-2 py-1 md:px-4 md:py-2 rounded-lg cursor-pointer"
         >
             + tambah stok
         </button>
@@ -30,7 +30,7 @@ export default function TambahStok({ onSuccess }) {
         {/* MODAL */}
         {open && (
             <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
-                <div className="bg-white p-6 rounded-xl w-96">
+                <div className="bg-white p-4 md:p-6 rounded-xl w-72 md:w-96">
 
                     {/* STEP 1 */}
                     {step === 1 && (
