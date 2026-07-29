@@ -5,6 +5,7 @@ import Tanggal from "../Components/Tanggal"
 import { useState, useEffect, useRef } from "react"
 import axios from "axios"
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
 
 export default function PenjualanHarian() {
     const [data, setData] = useState([])
@@ -158,7 +159,7 @@ export default function PenjualanHarian() {
                     <TambahStok onSuccess={refreshAll} />
                 </Navbar>
 
-                <div className="px-1 py-2 text-[10px] md:py-6 md:px-8 md:text-md">
+                <div className="px-1 py-2 text-[10px] md:py-6 md:px-8 md:text-md lg:text-lg">
                     {/* Header tabel */}
                     <div className="grid grid-cols-9 bg-slate-200 border border-slate-400 rounded-lg">
                         <div className="p-2 text-center font-semibold">No</div>
@@ -180,33 +181,33 @@ export default function PenjualanHarian() {
                     ) : (
                         currentData.map((item, index) => (
                             <div key={item.id_detail}
-                                className="grid grid-cols-9 my-2 py-2 rounded-lg bg-white border border-slate-400">
-                                <div className="py-2 text-center">{startIndex + index + 1}</div>
-                                <div className="py-2 text-center">{item.nama_produk}</div>
-                                <div className="py-2 text-center">{formatRupiah(item.harga)}</div>
-                                <div className="py-2 text-center">{item.stok_awal}</div>
-                                <div className="py-2 text-center">
+                                className="grid grid-cols-9 gap-1 md:gap-0 my-2 py-2 items-center rounded-lg bg-white border border-slate-400">
+                                <div className="md:py-2 text-center">{startIndex + index + 1}</div>
+                                <div className="md:py-2 text-center">{item.nama_produk}</div>
+                                <div className="md:py-2 text-center">{formatRupiah(item.harga)}</div>
+                                <div className="md:py-2 text-center">{item.stok_awal}</div>
+                                <div className="md:py-2 text-center">
                                     <input
                                         type="number"
                                         defaultValue={item.stok_akhir}
-                                        className="w-20 border rounded text-center"
+                                        className="w-10 lg:w-20 border rounded md:py-2 text-center"
                                         onBlur={(e) => handleUpdate(item, e.target.value)}
                                         onKeyDown={(e) => {
                                             if (e.key === 'Enter') handleUpdate(item, e.target.value)
                                         }}
                                     />
                                 </div>
-                                <div className="py-2 text-center">{item.jumlah_terjual ?? "-"}</div>
-                                <div className="py-2 text-center">{formatRupiah(item.subtotal)}</div>
-                                <div className="py-2 text-center">
+                                <div className="md:py-2 text-center">{item.jumlah_terjual ?? "-"}</div>
+                                <div className="md:py-2 text-center">{formatRupiah(item.subtotal)}</div>
+                                <div className="md:py-2 text-center">
                                     <button
                                         onClick={() => { setEditItem(item); setNewStokAwal(item.stok_awal) }}
-                                        className="bg-blue-500 text-white text-sm px-3 py-1 rounded hover:bg-blue-600 cursor-pointer"
+                                        className="md:py-2 text-center cursor-pointer hover:text-blue-500"
                                     >
-                                        Edit Stok
+                                        <FaEdit />
                                     </button>
                                 </div>
-                                <div className="py-2 text-center">
+                                <div className="md:py-2 text-center">
                                     <button
                                     className="hover:text-red-500 cursor-pointer"
                                     onClick={() => deleteProductActive(item.id_produk)}>
@@ -264,7 +265,7 @@ export default function PenjualanHarian() {
                         <button
                             onClick={() => setShowClosing(true)}
                             disabled={!semuaStokAkhirTerisi || !idPenjualan} //disable jika stok akhir belum terisi semua, sama ketika idPenjualan belum siap
-                            className={`px-6 py-4 rounded-xl font-semibold text-base transition-all ${
+                            className={`px-2 py-1 md:px-6 md:py-4 text-[10px] md:text-md rounded-xl font-semibold transition-all ${
                                 semuaStokAkhirTerisi
                                     ? "bg-[#004030] text-white hover:bg-[#346739] shadow-sm"
                                     : "bg-slate-200 text-slate-400 cursor-not-allowed"
