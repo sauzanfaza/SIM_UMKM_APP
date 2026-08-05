@@ -160,7 +160,91 @@ export default function PenjualanHarian() {
                 </Navbar>
 
                 <div className="px-1 py-2 text-[10px] md:py-6 md:px-8 md:text-md lg:text-lg">
+                    {/* card mobile */}
+                    <div className="md:hidden">
+                        {currentData.length === 0 ? (
+                            <div className="text-center text-slate-400 py-10">
+                                Belun ada data penjualan hari ini
+                            </div>
+                        ) : (
+                            currentData.map((item) => (
+                                <div key={item.id_detail}
+                                className="bg-white rounded-xl border border-slate-300 shadow-lg p-4 mb-4">
+                                    <h2 className="font-bold text-lg">
+                                        {item.nama_produk}
+                                    </h2>
+
+                                    <div className="grid grid-cols-2 gap-4 mt-2">
+                                        <p className="text-slate-500 text-[12px]">
+                                            Harga
+                                        </p>
+                                        <p className="font-medium">
+                                            {formatRupiah(item.harga)}
+                                        </p>
+
+                                        <p className="text-slate-500 text-[12px]">
+                                            Stok Awal
+                                        </p>
+                                        <p className="font-medium">
+                                            {item.stok_awal}
+                                        </p>
+
+                                        <div>
+                                            <p className="text-slate-500 text-[12px] mb-1">
+                                                Stok Akhir
+                                            </p>
+                                            <input type="number" 
+                                            defaultValue={item.stok_akhir}
+                                            className="w-20 border rounded-lg py-1 text-center"
+                                            onBlur={(e) => handleUpdate(item, e.target.value)}
+                                            onKeyDown={(e) => {
+                                                if(e.key === "Enter") {
+                                                    handleUpdate(item, e.target.value)
+                                                }
+                                            }}/>
+                                        </div>
+                                        <div>
+                                            <p className="text-slate-500 text-[12px]">
+                                                Terjual
+                                            </p>
+                                            <p className="font-medium pt-1">
+                                                {item.jumlah_terjual ?? "-"}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="border-t mt-2 pt-2">
+                                        <p className="text-slate-500 text-sm">
+                                            Total
+                                        </p>
+                                        <p className="font-bold text-[#004030 text-lg">
+                                            {formatRupiah(item.subtotal)}
+                                        </p>
+                                    </div>
+
+                                    <div className="flex justify-end gap-3 mt-2 py-2 border-t">
+                                        <button
+                                        onClick={() => {
+                                            setEditItem(item)
+                                            setNewStokAwal(item.stok_awal)
+                                        }}
+                                        className="flex text-[14px] items-center gap-2 px-3 py-2 hover:text-blue-500 cursor-pointer">
+                                            <FaEdit />        
+                                        </button>
+                                        <button
+                                        onClick={() => deleteProductActive(item.id_produk)}
+                                        className="flex text-[14px] items-center gap-2 px-3 py-2 hover:text-red-500 cursor-pointer">
+                                            <RiDeleteBin5Line />
+                                        </button>
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </div>
+
+                    {/* desktop */}
                     {/* Header tabel */}
+                    <div className="hidden md:block">
                     <div className="grid grid-cols-9 bg-slate-200 border border-slate-400 rounded-lg">
                         <div className="p-2 text-center font-semibold">No</div>
                         <div className="p-2 text-center font-semibold">Nama</div>
@@ -172,6 +256,7 @@ export default function PenjualanHarian() {
                         <div className="p-2 text-center font-semibold">Aksi</div>
                         <div className="p-2 text-center font-semibold">Delete</div>
                     </div>
+                    
 
                     {/* Rows */}
                     {currentData.length === 0 ? (
@@ -217,7 +302,7 @@ export default function PenjualanHarian() {
                             </div>
                         ))
                     )}
-
+                    </div>
                     {/* Pagination */}
                     {totalPages > 1 && (
                         <div className="flex justify-center items-center gap-3 mt-4">
@@ -261,11 +346,11 @@ export default function PenjualanHarian() {
                             <p className="text-2xl font-bold text-[#004030]">{formatRupiah(totalPendapatan)}</p>
                         </div>
 
-                        {/* Tombol closing */}
+                        {/* Tombol closing desktop */}
                         <button
                             onClick={() => setShowClosing(true)}
                             disabled={!semuaStokAkhirTerisi || !idPenjualan} //disable jika stok akhir belum terisi semua, sama ketika idPenjualan belum siap
-                            className={`px-2 py-1 md:px-6 md:py-4 text-[10px] md:text-md rounded-xl font-semibold transition-all ${
+                            className={`hidden md:block w-full md:w-auto px-2 py-1 md:px-6 md:py-4 text-[10px] md:text-md rounded-xl font-semibold transition-all ${
                                 semuaStokAkhirTerisi
                                     ? "bg-[#004030] text-white hover:bg-[#346739] shadow-sm"
                                     : "bg-slate-200 text-slate-400 cursor-not-allowed"
@@ -275,6 +360,19 @@ export default function PenjualanHarian() {
                         </button>
                     </div>
 
+                    {/* Tombol closing mobile */}
+                        <button
+                            onClick={() => setShowClosing(true)}
+                            disabled={!semuaStokAkhirTerisi || !idPenjualan} //disable jika stok akhir belum terisi semua, sama ketika idPenjualan belum siap
+                            className={`md:hidden w-full md:w-auto mt-4 px-2 py-1 md:px-6 md:py-4 text-[10px] md:text-md rounded-xl font-semibold transition-all ${
+                                semuaStokAkhirTerisi
+                                    ? "bg-[#004030] text-white hover:bg-[#346739] shadow-sm"
+                                    : "bg-slate-200 text-slate-400 cursor-not-allowed"
+                            }`}
+                        >
+                            Closing Hari Ini
+                        </button>
+                    
                     {/* Info belum semua terisi */}
                     {data.length > 0 && !semuaStokAkhirTerisi && (
                         <p className="text-sm text-amber-500 mt-2 text-right">
@@ -283,7 +381,6 @@ export default function PenjualanHarian() {
                     )}
                 </div>
             </div>
-
             {/* Modal Closing */}
             {showClosing && (
                 <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
