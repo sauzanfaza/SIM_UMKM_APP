@@ -9,7 +9,7 @@ export default function Navbar({children, title, handleSideBar}) {
             onClick={handleSideBar}/>
 
             <div className="w-full flex items-center">
-            <h1 className="font-semibold">{title}</h1>
+            <h1 className="font-semibold text-[10px] lg:text-xl">{title}</h1>
 
             <div className="flex items-center gap-2 md:gap-4 ml-auto">
                 {children}

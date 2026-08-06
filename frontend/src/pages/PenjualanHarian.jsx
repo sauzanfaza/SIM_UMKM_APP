@@ -334,16 +334,16 @@ export default function PenjualanHarian() {
                     )}
 
                     {/* Summary cards + tombol closing */}
-                    <div className="flex items-center gap-4 mt-6">
-                        <div className="flex-1 bg-white border border-slate-300 rounded-xl px-6 py-4 shadow-sm">
+                    <div className="flex gap-4 mt-6">
+                        <div className="flex-1 min-w-0 bg-white border border-slate-300 rounded-xl px-6 py-4 shadow-sm">
                             <p className="text-sm text-slate-500 mb-1">Total Produk Terjual</p>
                             <p className="text-2xl font-bold text-slate-700">
                                 {totalTerjual} <span className="text-base font-normal text-slate-400">item</span>
                             </p>
                         </div>
-                        <div className="flex-1 bg-white border border-slate-300 rounded-xl px-6 py-4 shadow-sm">
+                        <div className="flex-1 min-w-0 bg-white border border-slate-300 rounded-xl px-6 py-4 shadow-sm">
                             <p className="text-sm text-slate-500 mb-1">Total Pendapatan</p>
-                            <p className="text-2xl font-bold text-[#004030]">{formatRupiah(totalPendapatan)}</p>
+                            <p className="text-[16px] lg:text-2xl font-bold text-[#004030]">{formatRupiah(totalPendapatan)}</p>
                         </div>
 
                         {/* Tombol closing desktop */}
@@ -383,11 +383,12 @@ export default function PenjualanHarian() {
             </div>
             {/* Modal Closing */}
             {showClosing && (
-                <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-2xl p-6 w-[480px] shadow-2xl">
-                        <h2 className="text-xl font-bold mb-1">Closing Harian</h2>
+                <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+                    <div className="bg-white rounded-2xl p-4 md:p-6 w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+                        <h2 className="lg:text-xl font-bold mb-1">Closing Harian</h2>
                         <p className="text-sm text-slate-500 mb-5">{<Tanggal/>}</p>
 
+                    <div className="flex-1 overflow-y-auto pr-1">
                         <div className="bg-slate-50 rounded-xl p-4 mb-4 space-y-2 text-sm">
                             <h3 className="font-semibold text-slate-700 mb-3">Ringkasan Penjualan</h3>
                             <div className="flex justify-between">
@@ -412,7 +413,7 @@ export default function PenjualanHarian() {
                         <div className="max-h-44 overflow-y-auto mb-5 space-y-2">
                             {data.map((item) => (
                                 <div key={item.id_detail}
-                                    className="flex justify-between items-center text-sm bg-white border border-slate-200 rounded-lg px-3 py-2">
+                                    className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 text-sm bg-white border border-slate-200 rounded-lg px-3 py-2">
                                     <span className="font-medium">{item.nama_produk}</span>
                                     <div className="text-right">
                                         <span className="text-slate-500">Terjual: </span>
@@ -422,6 +423,7 @@ export default function PenjualanHarian() {
                                     </div>
                                 </div>
                             ))}
+                        </div>
                         </div>
 
                         <div className="flex gap-3">
@@ -433,7 +435,7 @@ export default function PenjualanHarian() {
                             </button>
                             <button
                                 onClick={handleSimpanClosing}
-                                className="flex-1 py-2.5 rounded-lg bg-[#004030] text-white hover:bg-[#346739] font-semibold"
+                                className="flex-1 py-2.5 text-sm md:text-md rounded-lg bg-[#004030] text-white hover:bg-[#346739] font-semibold"
                             >
                                 Simpan Closing
                             </button>
