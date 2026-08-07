@@ -71,101 +71,96 @@ export default function Laporan() {
 
     // Export Excel
     const handleExport = async () => {
-    if (data.length === 0) return alert("Tidak ada data untuk diexport")
+        if (data.length === 0) return alert("Tidak ada data untuk diexport")
 
-    const workbook = new ExcelJS.Workbook()
-    const sheet = workbook.addWorksheet("Laporan")
+        const workbook = new ExcelJS.Workbook()
+        const sheet = workbook.addWorksheet("Laporan")
 
-    // Header kolom
-    sheet.columns = [
-        { header: "No", key: "no", width: 5 },
-        { header: "Nama Produk", key: "nama_produk", width: 25 },
-        { header: "Harga Satuan", key: "harga", width: 15 },
-        { header: "Stok Awal", key: "stok_awal", width: 12 },
-        { header: "Stok Akhir", key: "stok_akhir", width: 12 },
-        { header: "Terjual", key: "terjual", width: 10 },
-        { header: "SubTotal (Rp)", key: "subtotal", width: 18 },
-    ]
+        sheet.columns = [
+            { header: "No", key: "no", width: 5 },
+            { header: "Nama Produk", key: "nama_produk", width: 25 },
+            { header: "Harga Satuan", key: "harga", width: 15 },
+            { header: "Stok Awal", key: "stok_awal", width: 12 },
+            { header: "Stok Akhir", key: "stok_akhir", width: 12 },
+            { header: "Terjual", key: "terjual", width: 10 },
+            { header: "SubTotal (Rp)", key: "subtotal", width: 18 },
+        ]
 
-    // Style header
-    sheet.getRow(1).eachCell((cell) => {
-        cell.font = { bold: true }
-        cell.fill = {
-            type: "pattern",
-            pattern: "solid",
-            fgColor: { argb: "FFE2E8F0" }
-        }
-    })
-
-    // Isi data
-    data.forEach((item, index) => {
-        sheet.addRow({
-            no: index + 1,
-            nama_produk: item.nama_produk,
-            harga: item.harga,
-            stok_awal: item.stok_awal,
-            stok_akhir: item.stok_akhir,
-            terjual: item.jumlah_terjual,
-            subtotal: item.subtotal
+        sheet.getRow(1).eachCell((cell) => {
+            cell.font = { bold: true }
+            cell.fill = {
+                type: "pattern",
+                pattern: "solid",
+                fgColor: { argb: "FFE2E8F0" }
+            }
         })
-    })
 
-    // Baris total
-    const totalRow = sheet.addRow({
-        no: "",
-        nama_produk: "TOTAL",
-        harga: "",
-        stok_awal: "",
-        stok_akhir: "",
-        terjual: totalTerjual,
-        subtotal: totalPendapatan
-    })
-    totalRow.eachCell((cell) => {
-        cell.font = { bold: true }
-        cell.fill = {
-            type: "pattern",
-            pattern: "solid",
-            fgColor: { argb: "FFD1FAE5" } // hijau muda
-        }
-    })
+        data.forEach((item, index) => {
+            sheet.addRow({
+                no: index + 1,
+                nama_produk: item.nama_produk,
+                harga: item.harga,
+                stok_awal: item.stok_awal,
+                stok_akhir: item.stok_akhir,
+                terjual: item.jumlah_terjual,
+                subtotal: item.subtotal
+            })
+        })
 
-    // Download
-    const buffer = await workbook.xlsx.writeBuffer()
-    const blob = new Blob([buffer], { type: "application/octet-stream" })
-    saveAs(blob, `Laporan_${selectedTanggal}.xlsx`)
-}
+        const totalRow = sheet.addRow({
+            no: "",
+            nama_produk: "TOTAL",
+            harga: "",
+            stok_awal: "",
+            stok_akhir: "",
+            terjual: totalTerjual,
+            subtotal: totalPendapatan
+        })
+        totalRow.eachCell((cell) => {
+            cell.font = { bold: true }
+            cell.fill = {
+                type: "pattern",
+                pattern: "solid",
+                fgColor: { argb: "FFD1FAE5" }
+            }
+        })
+
+        const buffer = await workbook.xlsx.writeBuffer()
+        const blob = new Blob([buffer], { type: "application/octet-stream" })
+        saveAs(blob, `Laporan_${selectedTanggal}.xlsx`)
+    }
 
     return (
         <div className="flex">
-            <Sidebar 
-            isSideBarOpen={isSideBarOpen}
-            setIsSideBarOpen={setIsSideBarOpen}
-            handleSideBar={handleSideBar}/>
+            <Sidebar
+                isSideBarOpen={isSideBarOpen}
+                setIsSideBarOpen={setIsSideBarOpen}
+                handleSideBar={handleSideBar} />
 
-            <div className="flex-1 flex flex-col h-screen">
+            <div className="flex-1 flex flex-col">
                 <Navbar title="Laporan"
-                        handleSideBar={handleSideBar}>
+                    handleSideBar={handleSideBar}>
                     <Tanggal />
                 </Navbar>
 
-                <div className="p-6 flex-1 overflow-hidden flex flex-col">
+                <div className="p-3 sm:p-4 md:p-6 flex-1 flex flex-col overflow-hidden">
                     {/* Ringkasan */}
-                    <h1 className="font-bold text-2xl mb-4">Ringkasan</h1>
-                    <div className="grid grid-cols-3 gap-4 mb-6">
-                        <div className="border border-slate-400 py-6 px-6 rounded-xl">
-                            <h1 className="font-semibold text-slate-500">Total Pendapatan</h1>
-                            <p className="my-3 text-3xl font-bold text-[#004030]">{formatRupiah(totalPendapatan)}</p>
+                    <h1 className="font-bold text-xl lg:text-2xl mb-3 sm:mb-4">Ringkasan</h1>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+                        <div className="border border-slate-400 p-4 rounded-xl">
+                            <h1 className="font-semibold text-slate-500 text-sm sm:text-base">Total Pendapatan</h1>
+                            <p className="my-2 sm:my-3 text-xl lg:text-3xl font-bold text-[#004030] break-words">{formatRupiah(totalPendapatan)}</p>
                         </div>
-                        <div className="border border-slate-400 py-6 px-6 rounded-xl">
-                            <h1 className="font-semibold text-slate-500">Total Terjual</h1>
-                            <p className="my-3 text-3xl font-bold">{totalTerjual} <span className="text-base font-normal text-slate-400">item</span></p>
+                        <div className="border border-slate-400 p-4 rounded-xl">
+                            <h1 className="font-semibold text-slate-500 text-sm sm:text-base">Total Terjual</h1>
+                            <p className="my-2 sm:my-3 text-xl sm:text-2xl lg:text-3xl font-bold">{totalTerjual} <span className="text-sm sm:text-base font-normal text-slate-400">item</span></p>
                         </div>
-                        <div className="border border-slate-400 py-6 px-6 rounded-xl flex flex-col justify-center">
-                            <h1 className="font-semibold text-slate-500 mb-2">Pilih Tanggal</h1>
+                        <div className="border border-slate-400 p-4 rounded-xl flex flex-col justify-center">
+                            <h1 className="font-semibold text-slate-500 mb-2 text-sm sm:text-base">Pilih Tanggal</h1>
                             <select
                                 value={selectedTanggal}
                                 onChange={(e) => setSelectedTanggal(e.target.value)}
-                                className="border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                             >
                                 {tanggalList.map(item => (
                                     <option key={item.tanggal} value={item.tanggal}>
@@ -177,10 +172,11 @@ export default function Laporan() {
                     </div>
 
                     {/* Detail Penjualan */}
-                    <h1 className="font-bold text-2xl mb-3">Detail Penjualan</h1>
+                    <h1 className="font-bold text-xl lg:text-2xl mb-3">Detail Penjualan</h1>
 
-                    {/* Header tabel */}
-                    <div className="grid grid-cols-5 p-3 bg-slate-200 border border-slate-400 rounded-lg text-sm font-semibold">
+                    {/* Header tabel - hanya tampil di md ke atas */}
+                    <div className="flex-1 flex flex-col overflow-hidden">
+                    <div className="hidden md:grid grid-cols-5 p-3 bg-slate-200 border border-slate-400 rounded-lg text-sm font-semibold">
                         <div>No</div>
                         <div>Nama Produk</div>
                         <div className="text-center">Harga</div>
@@ -189,7 +185,7 @@ export default function Laporan() {
                     </div>
 
                     {/* List scrollable */}
-                    <div className="flex-1 overflow-y-auto mt-1">
+                    <div className="overflow-y-auto h-[200px] lg:h-[280px] xl:h-[300px] mt-1">
                         {loading ? (
                             <div className="text-center text-slate-400 py-10">Memuat data...</div>
                         ) : data.length === 0 ? (
@@ -197,28 +193,46 @@ export default function Laporan() {
                         ) : (
                             data.map((item, index) => (
                                 <div key={item.id_detail}
-                                    className="grid grid-cols-5 p-3 my-1 bg-white border border-slate-300 rounded-lg text-sm">
-                                    <div>{index + 1}</div>
-                                    <div>{item.nama_produk}</div>
-                                    <div className="text-center">{formatRupiah(item.harga)}</div>
-                                    <div className="text-center">{item.jumlah_terjual ?? "-"}</div>
-                                    <div className="text-center">{formatRupiah(item.subtotal)}</div>
+                                    className="grid grid-cols-2 gap-y-1 md:grid-cols-5 md:gap-y-0 p-3 my-1 bg-white border border-slate-300 rounded-lg text-sm">
+
+                                    {/* Mobile labels + values, desktop plain columns */}
+                                    <div className="md:hidden font-semibold text-slate-500">No</div>
+                                    <div className="md:contents">
+                                        <div className="hidden md:block">{index + 1}</div>
+                                        <div className="md:hidden text-right">{index + 1}</div>
+                                    </div>
+
+                                    <div className="col-span-2 md:col-span-1 font-semibold md:font-normal">
+                                        {item.nama_produk}
+                                    </div>
+
+                                    <div className="md:hidden font-semibold text-slate-500">Harga</div>
+                                    <div className="md:text-center text-right md:text-inherit">{formatRupiah(item.harga)}</div>
+
+                                    <div className="md:hidden font-semibold text-slate-500">Terjual</div>
+                                    <div className="md:text-center text-right md:text-inherit">{item.jumlah_terjual ?? "-"}</div>
+
+                                    <div className="md:hidden font-semibold text-slate-500">SubTotal</div>
+                                    <div className="md:text-center text-right md:text-inherit">{formatRupiah(item.subtotal)}</div>
                                 </div>
                             ))
                         )}
                     </div>
 
                     {/* Baris Total */}
-                    <div className="grid grid-cols-5 p-3 mt-2 bg-slate-100 border border-slate-400 rounded-lg text-sm font-bold">
-                        <div className="col-span-3">Total</div>
-                        <div className="text-center">{totalTerjual} item</div>
-                        <div className="text-center text-[#004030]">{formatRupiah(totalPendapatan)}</div>
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-y-1 p-3 mt-2 bg-slate-100 border border-slate-400 rounded-lg text-sm font-bold">
+                        <div className="col-span-1 md:col-span-3">Total</div>
+                        <div className="text-right md:text-center">{totalTerjual} item</div>
+                        <div className="col-span-2 md:col-span-1 text-right md:text-center text-[#004030]">{formatRupiah(totalPendapatan)}</div>
                     </div>
+                    </div>
+
+
 
                     {/* Tombol Export */}
                     <button
                         onClick={handleExport}
-                        className="mt-4 self-end bg-green-700 hover:bg-[#004030] text-white font-semibold px-6 py-2.5 rounded-xl transition-all"
+                        className="mt-4 w-full sm:w-auto sm:self-end bg-green-700 hover:bg-[#004030] text-white font-semibold px-6 py-2.5 rounded-xl transition-all"
                     >
                         Export Excel
                     </button>

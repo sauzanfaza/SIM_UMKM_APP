@@ -67,7 +67,7 @@ export default function Dashboard() {
 
                 <div className="p-6">
                     {/* 3 Cards */}
-                    <div className="grid grid-cols-3 gap-4 mb-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                         {/* Total Pendapatan */}
                         <div className="bg-white border border-slate-200 rounded-xl px-6 py-5 shadow-sm">
                             <p className="text-sm text-slate-500 mb-1">Total Pendapatan Hari Ini</p>
@@ -106,17 +106,25 @@ export default function Dashboard() {
                     </div>
 
                     {/* Grafik */}
-                    <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-                        <h2 className="font-bold text-lg mb-4">Grafik Penjualan (7 Hari Terakhir)</h2>
+                    <div className="bg-white border border-slate-200 rounded-xl p-4 md:p-6 shadow-sm">
+                        <h2 className="font-bold md:text-lg mb-4">Grafik Penjualan (7 Hari Terakhir)</h2>
                         {grafikData.length === 0 ? (
-                            <div className="text-center text-slate-400 py-10">Belum ada data grafik</div>
+                            <div className="text-center text-slate-400 py-4 md:py-10">Belum ada data grafik</div>
                         ) : (
-                            <ResponsiveContainer width="100%" height={280}>
-                                <LineChart data={grafikData}>
+                            <div className="h-56 md:h-72 ">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={grafikData}
+                                            margin={{
+                                                top: 10, 
+                                                right: 20,
+                                                left: 10,
+                                                bottom: 5,
+                                            }}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                                     <XAxis
                                         dataKey="tanggal"
-                                        tick={{ fontSize: 12, fill: "#94a3b8" }}
+                                        tick={{ fontSize: 11, fill: "#94a3b8" }}
+                                        minTickGap={20}
                                     />
                                     <YAxis
                                         tick={{ fontSize: 12, fill: "#94a3b8" }}
@@ -124,6 +132,7 @@ export default function Dashboard() {
                                     />
                                     <Tooltip
                                         formatter={(val) => [formatRupiah(val), "Pendapatan"]}
+                                        cursor={{ stroke: "#16a34a", strokeWidth: 1}}
                                         labelStyle={{ fontWeight: "bold" }}
                                     />
                                     <Line
@@ -131,11 +140,12 @@ export default function Dashboard() {
                                         dataKey="pendapatan"
                                         stroke="#16a34a"
                                         strokeWidth={2.5}
-                                        dot={{ r: 4, fill: "#16a34a" }}
-                                        activeDot={{ r: 6 }}
+                                        dot={{ r: 3, fill: "#16a34a" }}
+                                        activeDot={{ r: 5 }}
                                     />
                                 </LineChart>
                             </ResponsiveContainer>
+                            </div>
                         )}
                     </div>
                 </div>

@@ -42,7 +42,7 @@ export default function TambahProduk({ onSuccess }) {
       {/* BUTTON */}
       <button
         onClick={() => setOpen(true)}
-        className="bg-[#004030] hover:bg-[#346739] text-white px-2 py-2 text-sm md:text-md md:px-4 md:py-2 rounded-lg cursor-pointer"
+        className="bg-[#004030] hover:bg-[#346739] text-white px-2 py-2 text-[12px] md:text-md md:px-4 md:py-2 rounded-lg cursor-pointer"
       >
         + Tambah Produk
       </button>
