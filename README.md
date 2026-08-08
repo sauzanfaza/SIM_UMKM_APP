@@ -78,7 +78,7 @@ DB_NAME=umkm_db
 JWT_SECRET=your_secret_key
 ```
 
-#Database Setup
+# Database Setup
 Create a MySQL database:
 CREATE DATABASE umkm_db;
 
