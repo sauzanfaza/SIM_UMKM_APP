@@ -1,4 +1,4 @@
-# Sistem Informasi Manajemen UMKM 
+<img width="278" height="277" alt="image" src="https://github.com/user-attachments/assets/b8c3575d-97bf-499a-b92e-9d0070c91d17" /># Sistem Informasi Manajemen UMKM 
 Aplikasi berbasis web untuk membantu pengelolaan data UMKM Toko Kue Bu Imas secara digital. Project ini dibuat sebagai platform manajemen UMKM yang memudahkan pengguna dalam mengelola informasi bisnis, produk, dan data terkait melalui sistem yang terintegrasi antara frontend dan backend.
 
 ## Preview
@@ -27,7 +27,10 @@ Aplikasi berbasis web untuk membantu pengelolaan data UMKM Toko Kue Bu Imas seca
 - Kalkulasi Otomatis
 - Laporan Keuangan
 - Cetak data laporan ke format berkas Excel
-- Responsive UI untuk berbagai ukuran layar (desktop, tablet, dan mobile)
+- Responsive UI untuk berbagai ukuran layar (desktop, tablet, dan mobile):
+  <img width="276" height="276" alt="image" src="https://github.com/user-attachments/assets/152f031c-21b9-47bb-9026-95bc4a73f69d" />
+  <img width="277" height="277" alt="image" src="https://github.com/user-attachments/assets/93ac7cba-5585-46f6-b36d-df621da3fd4c" />
+  <img width="278" height="277" alt="image" src="https://github.com/user-attachments/assets/009d8523-201d-4e95-802d-7582d1f921cc" />
 
 ## Tech Stack
 ## Frontend:
