@@ -7,12 +7,12 @@ Aplikasi berbasis web untuk membantu pengelolaan data UMKM Toko Kue Bu Imas seca
 <img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/bcb0e2a4-4e8a-4629-baa5-306cc54f1b6c" />
 
 ### Manajemen Produk
-<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/518b38e2-075d-4650-a964-02f232f086af" />
-<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/6416e74a-d388-4d47-a10f-63ea9a9f31fb" />
+<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/dcb32b59-4087-463c-a865-eaf9319f8459" />
+<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/11de7472-f16c-4d89-b43f-871b6d209de0" />
 
 ### Penjualan Harian
-<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/fe7e8921-ddfb-4458-ae67-dfc9ed1fd462" />
-<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/4b95ad72-caf1-4721-8a95-d300e93a6701" />
+<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/9a267f73-8fa0-4ccc-95a9-e0a11251b6a9" />
+<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/8f0f4e02-f8ca-4285-8863-a04ff3441fa1" />
 
 ### Laporan
 <img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/63e79320-c406-4c9d-b421-7098ea7891b8" />
